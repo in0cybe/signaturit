@@ -234,88 +234,92 @@
 <body>
 
 	<!-- HEADER: MENU -->
-	<header>
-		<div class="menu">
-			<ul>
-				<li class="menu-item hidden"><a href=<?= base_url() ?>>First phase</a></li>
-				<li class="menu-item hidden"><a href="https://codeigniter4.github.io/userguide/" target="_blank">Second stage</a>
-			</ul>
-		</div>
-	</header>
 
 	<!-- CONTENT -->
 
 	<section>
-		<h1>Plaintiff vs Defendant</h1>
-	<?php
-		helper('form');
+		<table border="1" cellspacing="0" cellpadding="">
+			<tbody>
+				<tr>
+					<td>
+						<h1>Plaintiff vs Defendant First phase</h1>
+						<?php
+						helper('form');
 
-		$optionsP = [
-			'5'  => 'King',
-			'2'    => 'Notary',
-			'1'  => 'Validator',
-		];
+						$optionsP = [
+							'5'  => 'King',
+							'2'    => 'Notary',
+							'1'  => 'Validator',
+						];
 
-		$optionsD = [
-			'5'  => 'King',
-			'2'    => 'Notary',
-			'1'  => 'Validator',
-		];
+						$optionsD = [
+							'5'  => 'King',
+							'2'    => 'Notary',
+							'1'  => 'Validator',
+						];
 
-		$attributes = ['plaintiff', 'defendant'];
-		//$attributes = ['plaintiff' => [1,2], 'defendant' => [2,4]];
-		echo form_open('http://localhost/Home/winner', $attributes);
-		// echo form_open(base_url() . '/Home/winner', $attributes);
-			echo form_label('The plaintiff ', 'plaintiff');
-			echo '</br>';
-			echo form_multiselect('plaintiff', $optionsP);
+						$attributes = ['plaintiff', 'defendant'];
+						//$attributes = ['plaintiff' => [1,2], 'defendant' => [2,4]];
+						echo form_open('http://localhost/Home/firstCase', $attributes);
+						// echo form_open(base_url() . '/Home/firstCase', $attributes);
+						echo form_label('The plaintiff ', 'plaintiff');
+						echo '</br>';
+						echo form_multiselect('plaintiff', $optionsP);
 
-			echo '</br>';
-			echo form_label('The defendant ', 'defendant ');
-			echo '</br>';
-			echo form_multiselect('defendant', $optionsD);
+						echo '</br>';
+						echo form_label('The defendant ', 'defendant ');
+						echo '</br>';
+						echo form_multiselect('defendant', $optionsD);
 
-			echo '</br></br>';
-			echo form_submit('mysubmit', 'Winner!');
-		echo form_close();
-	?>
+						echo '</br></br>';
+						echo form_submit('mysubmit', 'Winner!');
+						echo form_close();
+						?>
+					</td>
+					<td>
+						<h1>Plaintiff vs Defendant Second stage</h1>
+						<?php
+						helper('form');
+
+						$optionsP = [
+							'5'  => 'King',
+							'2'    => 'Notary',
+							'1'  => 'Validator',
+						];
+
+						$optionsD = [
+							'5'  => 'King',
+							'2'    => 'Notary',
+							'1'  => 'Validator',
+						];
+
+						$attributes = ['plaintiff', 'defendant'];
+						//$attributes = ['plaintiff' => [1,2], 'defendant' => [2,4]];
+						echo form_open('http://localhost/Home/secondCase', $attributes);
+						// echo form_open(base_url() . '/Home/secondCase', $attributes);
+						echo form_label('The plaintiff ', 'plaintiff');
+						echo '</br>';
+						echo form_multiselect('plaintiff', $optionsP);
+
+						echo '</br>';
+						echo form_label('The defendant ', 'defendant ');
+						echo '</br>';
+						echo form_multiselect('defendant', $optionsD);
+
+						echo '</br></br>';
+						echo form_submit('mysubmit', 'Winner!');
+						echo form_close();
+						?>
+					</td>
+				</tr>
+			</tbody>
+		</table>
 	</section>
 
 
 	<!-- FOOTER: DEBUG INFO + COPYRIGHTS -->
 
-	<footer>
-		<div class="environment">
-
-			<p>Page rendered in {elapsed_time} seconds</p>
-
-			<p>Environment: <?= ENVIRONMENT ?></p>
-
-		</div>
-
-		<div class="copyrights">
-
-			<p>&copy; <?= date('Y') ?> CodeIgniter Foundation. CodeIgniter is open source project released under the MIT
-				open source licence.</p>
-
-		</div>
-
-	</footer>
-
-	<!-- SCRIPTS -->
-
-	<script>
-		function toggleMenu() {
-			var menuItems = document.getElementsByClassName('menu-item');
-			for (var i = 0; i < menuItems.length; i++) {
-				var menuItem = menuItems[i];
-				menuItem.classList.toggle("hidden");
-			}
-		}
-	</script>
-
-	<!-- -->
-
+	
 </body>
 
 </html>
