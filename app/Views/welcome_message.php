@@ -243,6 +243,8 @@
 				<tr>
 					<td>
 						<h1>Plaintiff vs Defendant First phase</h1>
+						</br>
+						You can choose several options at once
 						<?php
 						helper('form');
 
@@ -278,6 +280,8 @@
 					</td>
 					<td>
 						<h1>Plaintiff vs Defendant Second stage</h1>
+						</br>
+						You can choose several options at once
 						<?php
 						helper('form');
 
@@ -319,7 +323,7 @@
 
 	<!-- FOOTER: DEBUG INFO + COPYRIGHTS -->
 
-	
+
 </body>
 
 </html>
