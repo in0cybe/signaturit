@@ -3,7 +3,9 @@
 namespace App\Controllers;
 
 use CodeIgniter\HTTP\RequestInterface;
-
+/**
+ * A simple kind of online judgment to earn money with Saul
+ */
 class Home extends BaseController
 {
 
@@ -22,9 +24,7 @@ class Home extends BaseController
     /**
      * Set the winner of the lawsuit
      *
-     * @param array $plaintiff
-     * @param array $defendant
-     * @return void
+     * @return mixed
      */
     public function winner()
     {
@@ -33,19 +33,28 @@ class Home extends BaseController
 
         try {
             $lawsuit = [];
+            $plaintiff = 0;
+            $defendant = 0;
             if ($this->request->getBody()) { // view form submission
                 $lawsuit = explode("&", $this->request->getBody());
-                $res = [];
+
+                $tempPlaintiff = [];
+                $tempDefendant = [];
                 foreach ($lawsuit as $key => $value) {
                     //if (str_contains($value, 'plaintiff')) { // Only for php 8
                     if (strpos($value, 'plaintiff') !== false) { // php 7
-                        $res['plaintiff'][$key] = explode("plaintiff=", $value);
+                        $tempPlaintiff[$key] = explode("plaintiff=", $value);
                     } elseif (strpos($value, 'defendant') !== false) {
-                        $res['defendant'][$key] = explode("defendant=", $value);
+                        $tempDefendant[$key] = explode("defendant=", $value);
                     }
                 }
-                $kk = array_sum($res['plaintiff']);
-                array_sum($res['defendant']);
+
+                foreach ($tempPlaintiff as $key => $value) {
+                    $plaintiff += intval($value[1]);
+                }
+                foreach ($tempDefendant as $key => $value) {
+                    $defendant += intval($value[1]);
+                }
             } else { // HTTP request
                 $plaintiff = array_sum(json_decode($_POST["plaintiff"]));
                 $defendant = array_sum(json_decode($_POST["defendant"]));
@@ -54,24 +63,22 @@ class Home extends BaseController
                 $lawsuit['defendant'] = $defendant;
             }
 
-
-            $data = ['result' => null];
-            if (array_sum($plaintiff) > array_sum($defendant)) {
+            $data = ['result' => null];     
+            // Control of the lawsuit
+            if ($plaintiff > $defendant) {
                 $data["result"] = 'defendant';
-            } elseif (array_sum($plaintiff) == array_sum($defendant)) {
+            } elseif ($plaintiff == $defendant) {
                 $data["result"] = 'tie';
             } else {
                 $data["result"] = 'plaintiff';
             }
 
             // Return the data to the view
-            return view('winner_message', $data);
+            return view('winner_message', $data);            
 
         } catch (\Exception $e) {
-            $this->logger->info("[" . __METHOD__ . "] -> Exception: " . json_encode($e));
+            $this->logger->debug("[" . __METHOD__ . "] -> Exception: " . json_encode($e));
             return false;
-        }
-
-        
+        }        
     }
 }
